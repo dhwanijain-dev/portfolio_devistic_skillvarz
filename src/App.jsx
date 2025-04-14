@@ -17,13 +17,13 @@ const TerminalLoader = ({ onLoadingComplete }) => {
   const containerRef = useRef(null);
 
   const commands = [
-    // "Initializing system modules...",
-    // "Loading 3D assets...",
-    // "Setting up shaders...",
-    // "Creating scene graph...",
-    // "Linking environment...",
-    // "Deploying portfolio shell...",
-    // "Finalizing setup..."
+    "Initializing system modules...",
+    "Loading 3D assets...",
+    "Setting up shaders...",
+    "Creating scene graph...",
+    "Linking environment...",
+    "Deploying portfolio shell...",
+    "Finalizing setup..."
   ];
  
   useEffect(() => {
