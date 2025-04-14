@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMobile } from "../hooks/useMobile";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Menu = () => {
     const { isMobile } = useMobile();
@@ -10,15 +11,15 @@ export const Menu = () => {
     };
 
     return (
-        <nav className="menu fixed top-0 left-0 w-full bg-white shadow-md z-50">
-            <div className="container mx-auto flex justify-between items-center px-4 py-3">
-                 <img
-                    className="menu__logo"
+        <nav className="menu fixed top-0left-0 w-full bg-white shadow-md">
+            <div className="container mx-auto flex justify-between items-center px-4 py-2">
+                <img
+                    className="menu__logo mt-2"
                     src="logo.png"
                     alt="logo"
                 />
 
-                 {!isMobile && (
+                {!isMobile && (
                     <div className="menu__buttons flex gap-6 text-lg font-semibold text-gray-800">
                         <a href="#home" className="menu__button">
                             Home
@@ -35,7 +36,7 @@ export const Menu = () => {
                     </div>
                 )}
 
-                 {isMobile && (
+                {isMobile && (
                     <button
                         className="menu__toggle text-gray-800 text-2xl"
                         onClick={toggleMenu}
@@ -45,22 +46,31 @@ export const Menu = () => {
                 )}
             </div>
 
-             {isMobile && isMenuOpen && (
-                <div className="menu__mobile   shadow-md flex flex-col items-center gap-4 py-4">
-                    <a href="#home" className="menu__button" onClick={toggleMenu}>
-                        Home
-                    </a>
-                    <a href="#skills" className="menu__button" onClick={toggleMenu}>
-                        Skills
-                    </a>
-                    <a href="#projects" className="menu__button" onClick={toggleMenu}>
-                        Projects
-                    </a>
-                    <a href="#contact" className="menu__button" onClick={toggleMenu}>
-                        Contact
-                    </a>
-                </div>
-            )}
+            {/* Mobile Menu with Smooth Transition */}
+            <AnimatePresence>
+                {isMobile && isMenuOpen && (
+                    <motion.div
+                        className="menu__mobile flex flex-col items-center gap-4 py-4"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                        <a href="#home" className="menu__button" onClick={toggleMenu}>
+                            Home
+                        </a>
+                        <a href="#skills" className="menu__button" onClick={toggleMenu}>
+                            Skills
+                        </a>
+                        <a href="#projects" className="menu__button" onClick={toggleMenu}>
+                            Projects
+                        </a>
+                        <a href="#contact" className="menu__button" onClick={toggleMenu}>
+                            Contact
+                        </a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };

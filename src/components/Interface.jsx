@@ -20,23 +20,14 @@ export const Interface = () => {
         setHasScrolled(scrollData.offset > 0 )
         
     })
-    useEffect(()=>{
-        function sendEmail() {
-            const email = "dhwanijain2601@gmail.com";
-            const subject = encodeURIComponent("Hello");
-            const body = encodeURIComponent("Hi there!");
-            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
-
-            window.open(mailtoLink, "_blank");
-        }
-        
-    })
+  
     
     return (
         <div className="interface">
             <div className="sections">
                 {/* HOME */}
                 <section className="section section--bottom">                 
+                   
                     <motion.div
                         className="scroll-down "
                     initial={{
@@ -67,6 +58,7 @@ export const Interface = () => {
                     </motion.div>
 
                     </motion.div>
+                    
                 </section>
                 {/* SKILLS */}
                 <section className="section section--right mobile--section--left mobile--section--bottom">
@@ -167,19 +159,22 @@ export const Interface = () => {
                                     delay: idx * 0.5,
                                 }}
                             >
-                                <a href={project.link} target="_blank" className="text-decoration-none">
-                                    <img
-                                        className="project__image text-decoration-none"
-                                        src={project.image}
-                                        alt={project.name}
+
+                                
+                                 <a href={project.link} target="_blank" className="text-decoration-none">
+                                  <img
+                                         className="project__image text-decoration-none"
+                                         src={project.image}
+                                         alt={project.name}
                                     />
-                                    <div className="project__details text-decoration-none">
-                                        <h2 className="project__details__name  text-decoration-none">{project.name}</h2>
-                                        <p className="project__details__description text-decoration-none">
-                                            {project.description}
-                                        </p>
-                                    </div>
-                                </a>
+                                     <div className="project__details text-decoration-none">
+                                         <h2 className="project__details__name  text-decoration-none">{project.name}</h2>
+                                         <p className="project__details__description text-decoration-none">
+                                             {project.description}
+                                         </p>
+                                     </div>
+                                 </a>
+                                
                             </motion.div>
                         ))}
                     </motion.div>

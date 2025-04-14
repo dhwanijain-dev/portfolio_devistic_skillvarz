@@ -7,6 +7,7 @@ import { MotionConfig } from "framer-motion";
 import { Interface } from "./components/Interface";
 import { Menu } from "./components/Menu";
  
+ 
 const TerminalLoader = ({ onLoadingComplete }) => {
   const { progress } = useProgress();
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
@@ -16,13 +17,13 @@ const TerminalLoader = ({ onLoadingComplete }) => {
   const containerRef = useRef(null);
 
   const commands = [
-    "Initializing system modules...",
-    "Loading 3D assets...",
-    "Setting up shaders...",
-    "Creating scene graph...",
-    "Linking environment...",
-    "Deploying portfolio shell...",
-    "Finalizing setup..."
+    // "Initializing system modules...",
+    // "Loading 3D assets...",
+    // "Setting up shaders...",
+    // "Creating scene graph...",
+    // "Linking environment...",
+    // "Deploying portfolio shell...",
+    // "Finalizing setup..."
   ];
  
   useEffect(() => {
@@ -153,37 +154,40 @@ function App() {
 
   return (
     <>
+    
       {isLoading && <TerminalLoader onLoadingComplete={handleLoadingComplete} />}
+      
+        <div className={`portfolio-content w-full h-screen ${isLoading ? 'hidden' : 'block'}`}>
+          <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }}>
+            <color attach="background" args={["#f5f3ee"]} />
+            <fog attach="fog" args={["#f5f3ee", 10, 50]} />
 
-      <div className={`portfolio-content w-full h-screen ${isLoading ? 'hidden' : 'block'}`}>
-        <Canvas camera={{ position: [0, 0.5, 5], fov: 42 }}>
-          <color attach="background" args={["#f5f3ee"]} />
-          <fog attach="fog" args={["#f5f3ee", 10, 50]} />
-
-          <Suspense fallback={null}>
-            <ScrollControls pages={config.sections.length} damping={0.1} maxSpeed={0.2}>
-              <MotionConfig transition={{
-                duration: 0.6,
-              }}>
-                <group position-y={-1}>
-                  <Experience />
-                </group>
-              </MotionConfig>
-              <Scroll html>
-                <MotionConfig
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <Interface />
+            <Suspense fallback={null}>
+              <ScrollControls pages={config.sections.length} damping={0.1} maxSpeed={0.2}>
+                <MotionConfig transition={{
+                  duration: 0.6,
+                }}>
+                  <group position-y={-1}>
+                    <Experience />
+                  </group>
                 </MotionConfig>
-              </Scroll>
-            </ScrollControls>
-          </Suspense>
-        </Canvas>
+                <Scroll html>
+                  <MotionConfig
+                    transition={{
+                      duration: 1,
+                    }}
+                  >
+                    <Interface />
+                  </MotionConfig>
+                </Scroll>
+              </ScrollControls>
+            </Suspense>
+          </Canvas>
 
-        <Menu />
-      </div>
+          <Menu />
+        </div>
+      
+      
     </>
   );
 }

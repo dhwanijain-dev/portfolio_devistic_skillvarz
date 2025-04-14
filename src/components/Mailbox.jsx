@@ -31,9 +31,19 @@ export function Mailbox(props) {
   return (
     <group {...props}
      dispose={null}
-      onPointerEnter={() => setMailboxHovered(true)}
-      onPointerLeave={() => setMailboxHovered(false)}
-      onClick={() => window.open(`mailto:${config.contact.mail}`)}
+      onPointerEnter={() => {
+        setMailboxHovered(true);
+        document.body.style.cursor = 'pointer';
+      }}
+
+      onPointerLeave={() => {
+        setMailboxHovered(false);
+        document.body.style.cursor = 'auto';
+      }}
+      onClick={() => {
+        console.log("Clicked!");
+        window.location.href = `https://wa.me/6269017333?text=Hi!%20I%20want%20to%20contact%20you`}
+      }
      >
       <mesh
         geometry={nodes.group2028911354.geometry}

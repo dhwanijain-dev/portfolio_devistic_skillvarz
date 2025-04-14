@@ -19,6 +19,10 @@ import { useMobile } from "../hooks/useMobile";
 import { Easel } from "./easel";
 import { CouchLarge } from "./couch";
 import { Html } from '@react-three/drei'
+import { PhoneBooth } from "./Phonebooth";
+import Confetti from "react-confetti-boom";
+import { Pigeon } from "./Pigeon";
+import RotatingText from "./RotatingText";
 const SECTION_DISTANCE =  10
 function Particles() {
   const ref = useRef();
@@ -40,7 +44,18 @@ function Particles() {
 
 
 export const Experience = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
 
+  const handleMailboxClick = () => {
+    const email = "dhwanijain2601@gmail.com";
+    const subject = encodeURIComponent("Hello");
+    const body = encodeURIComponent("Hi there!");
+    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    setTimeout(() => {
+      window.location.href = mailtoLink;
+    }, 3000);
+  };
   const[section,setSection] = useState(config.sections[0])
   const { isMobile, scaleFactor } = useMobile();
   const sceneContainer = useRef()
@@ -118,27 +133,29 @@ export const Experience = () => {
             rotation-y={THREE.MathUtils.degToRad(0)}
             position={isMobile ? [2, 1, -4] : [scaleFactor * 4, 1.3, -2]}
           />
-
           
-            <Center disableY disableZ>
+            
+          
+          
+            <Center  disableY disableZ>
               <SectionTitle
                 size={0.8}
                 position-y={1.6}
-                position-z={-3}
+              position-z={isMobile ? -6  : -3}
                 bevelEnabled
                 bevelThickness={0.3}
               >
                 {config.home.title}
               </SectionTitle>
             </Center>
-            <Heart position-z={isMobile ? -2 : -2.8} position-x={1.8} position-y={2.7} scale={0.1} />
+            <Heart position-z={isMobile ? -6 : -2.5} position-x={1.8} position-y={2.7} scale={0.1} />
 
           
           <Center disableY disableZ>
             <SectionTitle
               size={1.2}
               position-x={-2.6}
-              position-z={-3}
+              position-z={isMobile ? -6 : -3}
               bevelEnabled
               bevelThickness={0.3}
               rotation-y={Math.PI / 10}
@@ -243,27 +260,16 @@ export const Experience = () => {
             CONTACT
           </SectionTitle>
           <group position-x={-2 * scaleFactor}>
-            <ParkBench
-              scale={0.5}
+ 
+            <PhoneBooth
+
+              scale={0.45}
               position-x={-0.5}
-              position-z={-2.5}
+              position-z={isMobile ? -2.52 : -1.5}
+              position-y={-0.3}
               rotation-y={-Math.PI / 4}
             />
-            <group position-y={2.2} position-z={-0.5}>
-              <Float floatIntensity={2} rotationIntensity={1.5}>
-                <Balloon scale={1.5} position-x={-0.5} color="#71a2d9" />
-              </Float>
-              <Float
-                floatIntensity={1.5}
-                rotationIntensity={2}
-                position-z={0.5}
-              >
-                <Balloon scale={1.3} color="#d97183" />
-              </Float>
-              <Float speed={2} rotationIntensity={2}>
-                <Balloon scale={1.6} position-x={0.4} color="yellow" />
-              </Float>
-            </group>
+           
           </group>
 
           <Mailbox
@@ -272,17 +278,20 @@ export const Experience = () => {
             position-x={1}
             position-y={0.25}
             position-z={0.5}
+            onClick={handleMailboxClick} 
           />
-          <Float floatIntensity={1.5} speed={3}>
-            {/* <Pigeon
-              position-x={isMobile ? 0 : 2 * scaleFactor}
-              position-y={isMobile ? 2.2 : 1.5}
-              position-z={-0.5}
-              scale={0.3}
-            /> */}
+
+          
+           <Float floatIntensity={1.5} speed={3}>
+              <Pigeon
+                scale={0.25}
+                position-x={ 1.4}
+              position-y={1.5}
+              />
           </Float>
         </motion.group>
       </motion.group> 
     </>
   );
 };
+ 
